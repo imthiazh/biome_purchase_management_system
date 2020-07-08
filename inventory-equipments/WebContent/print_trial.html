@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body id="element-to-print">
+<!-- <script src="html2pdf.bundle.min.js"></script> -->
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="jspdf.min.js"></script>
+<!-- <script>
+function printpdf()
+{
+var element = document.getElementById('element-to-print');
+html2pdf(element);
+}
+</script> -->
+<form width="50" id="theform" >
+	Number 1:
+	<input type="number" id="num1" name="num1" /><br>
+	Number 2:
+	<input type="number" id="num2" name="num2"/><br>
+	<table id="tab" name="tab">
+	<tr>
+		<td>Hello</td>
+		<td>World</td>
+	</tr>
+	<tr>
+		<td>Hello2</td>
+		<td>World2</td>
+	</tr>
+	</table>
+	<input type="button" value="printer" id="printer"/>
+	
+</form>
+<script>
+$('#printer').click(function() {
+	
+	 var doc = new jsPDF();
+	 
+	var name1 = $('#num1').val();
+	 var name2 = $('#num2').val();
+	 var table1 = $('#tab').val();
+	
+	doc.setFontSize(26);
+	doc.setTextColor(92, 76, 76);
+	
+	doc.text(23, 81, name1);
+	doc.text(23, 90, name2);
+	doc.text(23, 100, table1);
+	/* doc.text(23, 162, department);
+	doc.text(23, 202, title); */
+	 doc.save('test.pdf');
+
+	
+	
+
+
+});
+</script>
+</body>
+</html>

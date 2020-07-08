@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="//code.jquery.com/jquery-3.5.1.js"></script>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<input id="searchFrom" class="searchInput" type="text" placeholder="From"/>
+<input id="searchTo" class="searchInput" type="text" placeholder="To" >
+<table class="fbody" border="1">
+  <tr>
+    <td>nothing</td>
+    <td>nothing</td>
+    <td>4/18/2016</td>
+    <td>nothing</td>
+  </tr>
+  <tr>
+    <td>nothing</td>
+    <td>nothing</td>
+    <td>4/19/2016</td>
+    <td>nothing</td>
+  </tr>
+  <tr>
+    <td>nothing</td>
+    <td>nothing</td>
+    <td>4/20/2016</td>
+    <td>nothing</td>
+  </tr>
+</table>
+<script>
+$(".searchInput").on("input", function() {
+	  var from = stringToDate($("#searchFrom").val());
+	  var to = stringToDate($("#searchTo").val());
+	  $(".fbody tr").each(function() {
+	    var row = $(this);
+	    var date = stringToDate(row.find("td").eq(2).text());
+	    
+	    //show all rows by default
+	    var show = true;
+
+	    //if from date is valid and row date is less than from date, hide the row
+	    if (from && date < from)
+	      show = false;
+	    
+	    //if to date is valid and row date is greater than to date, hide the row
+	    if (to && date > to)
+	      show = false;
+
+	    if (show)
+	      row.show();
+	    else
+	      row.hide();
+	  });
+	});
+
+	//parse entered date. return NaN if invalid
+	function stringToDate(s) {
+	  var ret = NaN;
+	  var parts = s.split("/");
+	  date = new Date(parts[2], parts[0], parts[1]);
+	  if (!isNaN(date.getTime())) {
+	    ret = date;
+	  }
+	  return ret;
+	}
+</script>
+</body>
+</html>
