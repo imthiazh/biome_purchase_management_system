@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Test Qtip on Hover</title>
+<script>
+function filterRows() {
+	  var from = $('#datefilterfrom').val();
+	  var to = $('#datefilterto').val();
+
+	  if (!from && !to) { // no value for from and to
+	    return;
+	  }
+
+	  from = from || '1970-01-01'; // default from to a old date if it is not set
+	  to = to || '2999-12-31';
+
+	  var dateFrom = moment(from);
+	  var dateTo = moment(to);
+
+	  $('#testTable tr').each(function(i, tr) {
+	    var val = $(tr).find("td:nth-child(3)").text();
+	    var dateVal = moment(val, "DD/MM/YYYY");
+	    var visible = (dateVal.isBetween(dateFrom, dateTo, null, [])) ? "" : "none"; // [] for inclusive
+	    $(tr).css('display', visible);
+	  });
+	}
+
+	$('#datefilterfrom').on("change", filterRows);
+	$('#datefilterto').on("change", filterRows);
+</script>
+<!-- <script src="jquery.1.6.1.min.js"></script> -->
+<!-- <script src="//code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
+
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"> -->
+</head>
+    <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+ <div class="row">
+        <div class="col-md-3">
+            <h4>Date from</h4>
+            <input type="date" class="form-control" id="datefilterfrom" data-date-split-input="true">
+        </div>
+        <div class="col-md-3">
+            <h4>Date to</h4>
+          <input type="date" class="form-control" id="datefilterto" data-date-split-input="true">
+        </div>
+        </div>
+        
+<table id="testTable" class="table" border="1">
+  <tr>
+    <td>nothing</td>
+    <td>nothing</td>
+    <td>18/07/2018</td>
+    <td>nothing</td>
+  </tr>
+  <tr>
+    <td>nothing</td>
+    <td>nothing</td>
+    <td>19/07/2018</td>
+    <td>nothing</td>
+  </tr>
+  <tr>
+    <td>nothing</td>
+    <td>nothing</td>
+    <td>20/07/2018</td>
+    <td>nothing</td>
+  </tr>
+</table>
+    </body>
+    </html>
